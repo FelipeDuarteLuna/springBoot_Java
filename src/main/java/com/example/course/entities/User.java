@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -25,6 +27,7 @@ public class User implements Serializable{
 	private String phone;
 	private String password;
 	
+	@JsonIgnore // Para corrigir Associação de mão Dupla. Porque o Usuario chama uma lista de pedido e na lista de pedido chama o usuario e fina no loop infinito.
 	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<>();  // Associação a Classe Order. Chave estrangeira.
 	
