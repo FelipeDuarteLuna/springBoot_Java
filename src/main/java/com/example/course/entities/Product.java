@@ -9,8 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Produto")
@@ -27,7 +31,12 @@ public class Product implements Serializable {
 	private double price;
 	private String imgUrl;
 	
-	@Transient//Especifica que a propriedade ou o campo não é persistente. 
+	//@Transient//Especifica que a propriedade ou o campo não é persistente. 
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "tb_product_category",
+	joinColumns = @JoinColumn(name = "product_id"),
+	inverseJoinColumns = @JoinColumn(name = "category_id" ))
 	private Set<Category> categories = new HashSet<>();
 	/*--  Set representa um conjunto, para garantir que não irá existir um produto com mais de 1 vez, com a mesma categoria;
 	 * -- Coleção não é adicionada ao Construtor, porque já está sendo estanciada aqui;

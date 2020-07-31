@@ -10,8 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="Categoria")
@@ -24,7 +26,9 @@ public class Category implements Serializable {
 	 @Column(name="nome")
 	private String name;
 	
-	 @Transient //Especifica que a propriedade ou o campo não é persistente. 
+	// @Transient //Especifica que a propriedade ou o campo não é persistente.
+	 @JsonIgnore
+	 @ManyToMany(mappedBy = "categories")
 	 private Set<Product> products = new HashSet<>();
 	
 	//Constructor
