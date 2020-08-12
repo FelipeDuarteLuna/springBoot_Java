@@ -36,7 +36,7 @@ public class Product implements Serializable {
 	@ManyToMany
 	@JoinTable(name = "tb_product_category",
 	joinColumns = @JoinColumn(name = "product_id"),
-	inverseJoinColumns = @JoinColumn(name = "category_id" ))
+	inverseJoinColumns = @JoinColumn(name = "category_id" ))// InverserJoinColumns é a Forgein Key
 	private Set<Category> categories = new HashSet<>();
 	/*--  Set representa um conjunto, para garantir que não irá existir um produto com mais de 1 vez, com a mesma categoria;
 	 * -- Coleção não é adicionada ao Construtor, porque já está sendo estanciada aqui;

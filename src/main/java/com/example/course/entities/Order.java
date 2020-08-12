@@ -2,6 +2,8 @@ package com.example.course.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,10 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.example.course.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -34,6 +38,10 @@ public class Order implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="Client_Id")
 	private User client; // Associação a Classe Usuário. Chave estrangeira.
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "id.order")
+	private Set<OrderItem> items = new HashSet<>();
 	
 	// Constructor
 	public Order() {
@@ -82,6 +90,10 @@ public class Order implements Serializable {
 	
 	public User getClient() {
 		return this.client;
+	}
+	
+	public Set<OrderItem> getItems(){
+		return this.items;
 	}
 
 	//Method's
