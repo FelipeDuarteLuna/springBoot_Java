@@ -57,7 +57,7 @@ public class Category implements Serializable {
 	public String getName() {
 		return this.name;
 	}
-	
+	@JsonIgnore
 	public Set<Product> getProducts() {
 		return products;
 	}
