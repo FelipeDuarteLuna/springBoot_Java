@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -41,6 +42,9 @@ public class Product implements Serializable {
 	/*--  Set representa um conjunto, para garantir que não irá existir um produto com mais de 1 vez, com a mesma categoria;
 	 * -- Coleção não é adicionada ao Construtor, porque já está sendo estanciada aqui;
 	 *-- HashSet foi instanciada para a coleção ser vazia e não pode ser nula. Set interface.  */
+	
+	@OneToMany(mappedBy = "id.product" )
+	private Set<OrderItem> items = new HashSet<>();
 	
 	//constructor
 	public Product(){
@@ -100,6 +104,16 @@ public class Product implements Serializable {
 
 	public Set<Category> getCategories() {
 		return categories;
+	}
+	
+	@JsonIgnore
+	public Set<Order> getOrders(){
+		Set<Order> set = new HashSet<>();
+		for(OrderItem x : items) {
+			set.add(x.getOrder());
+		}
+		
+		return set;
 	}
 
 	//Method's

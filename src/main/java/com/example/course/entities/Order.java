@@ -39,7 +39,7 @@ public class Order implements Serializable {
 	@JoinColumn(name="Client_Id")
 	private User client; // Associação a Classe Usuário. Chave estrangeira.
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "id.order")
 	private Set<OrderItem> items = new HashSet<>();
 	

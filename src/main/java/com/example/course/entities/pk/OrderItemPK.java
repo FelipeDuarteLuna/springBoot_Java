@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 
 import com.example.course.entities.Order;
 import com.example.course.entities.Product;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Embeddable
 public class OrderItemPK  implements Serializable {
@@ -29,6 +30,7 @@ public class OrderItemPK  implements Serializable {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
+	
 	public Order getOrder() {
 		return order;
 	}
