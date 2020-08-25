@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -32,6 +33,7 @@ public class Product implements Serializable {
 	private double price;
 	private String imgUrl;
 	
+	//@JsonIgnore
 	//@Transient//Especifica que a propriedade ou o campo não é persistente. 
 	@JsonIgnore
 	@ManyToMany
